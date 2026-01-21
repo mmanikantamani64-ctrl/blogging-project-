@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Post | ExcelR Blog App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body{
+            background: linear-gradient(135deg,#6a11cb,#2575fc);
+            min-height:100vh;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* NAVBAR */
+        .top-nav{
+            background: linear-gradient(90deg,#7f00ff,#e100ff);
+            padding:12px 0;
+            box-shadow:0 4px 10px rgba(0,0,0,.25);
+        }
+        .top-nav .btn{
+            border-radius:10px;
+            font-weight:600;
+            padding:6px 15px;
+        }
+
+        /* FORM CARD */
+        .form-card{
+            background:#ffffff;
+            border-radius:18px;
+            padding:35px;
+            max-width:800px;
+            margin:60px auto;
+            box-shadow:0 12px 30px rgba(0,0,0,0.25);
+            animation:fadeUp 0.7s ease;
+        }
+
+        .form-title{
+            color:#6a11cb;
+            font-weight:700;
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        label{
+            font-weight:600;
+            color:#444;
+        }
+
+        .form-control{
+            border-radius:10px;
+        }
+
+        .btn-update{
+            background: linear-gradient(90deg,#2575fc,#6a11cb);
+            color:white;
+            border:none;
+            padding:10px 25px;
+            border-radius:12px;
+            font-weight:600;
+        }
+
+        .btn-update:hover{
+            opacity:0.9;
+        }
+
+        .back-link{
+            display:block;
+            text-align:center;
+            margin-top:15px;
+            font-weight:600;
+            color:#2575fc;
+            text-decoration:none;
+        }
+
+        .back-link:hover{
+            text-decoration:underline;
+        }
+
+        @keyframes fadeUp{
+            from{
+                opacity:0;
+                transform:translateY(30px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="top-nav">
+    <div class="container d-flex justify-content-between align-items-center">
+        <h4 class="text-white m-0">ExcelR Blog App</h4>
+
+        <div class="d-flex gap-3">
+            <a href="/dashboard" class="btn btn-outline-light">Home</a>
+            <a href="/posts/new" class="btn btn-light">New Post</a>
+            <a href="/logout" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<!-- EDIT FORM -->
+<div class="form-card">
+    <h3 class="form-title">✏️ Edit Your Post</h3>
+
+    <form th:action="@{/posts/update}" method="post" th:object="${post}">
+
+        <!-- Hidden ID -->
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="mb-3">
+            <label>Title</label>
+            <input type="text" class="form-control" th:field="*{title}" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Content</label>
+            <textarea rows="6" class="form-control" th:field="*{content}" required></textarea>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-update">Update Post</button>
+        </div>
+    </form>
+
+    <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+</div>
+
+</body>
+</html>
